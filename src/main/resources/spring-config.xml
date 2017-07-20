@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--можно задавать значение поля класса(бина) прямо здесь через тег property  -->
+    <bean id="defaultProcessor" class="com.app.DefaultProcessorImpl">
+        <property name="title" value="Example"/>
+    </bean>
+
+    <!-- или можно задавать значение поля класса(бина) в конструкторе через тег constructor-arg -->
+    <bean id="defaultProcessor2" class="com.app.DefaultProcessorImpl">
+        <constructor-arg name="title" value="Example2"/>
+        <!--<constructor-arg index="0" value="Example2"/>-->
+    </bean>
+
+    <bean id="xmlProcessor" class="com.app.XMLProcessor"/>
+
+    <!--здесь описываем биндля класса com.app.DataService. Но у него конструктор с полем processor, поэтому надо дать
+    ему значение - ссылка (ref) на другой бин (com.app.DefaultProcessorImpl)-->
+    <bean id="dataService" class="com.app.DataService">
+    <constructor-arg index="0" ref="defaultProcessor2"/> <!--меняя здесь defaultProcessor на defaultProcessor2 или на
+    xmlProcessor в приложении будет вызываться или имплементация DefaultProcessorImp с разными значениями поля или
+    другая имплементация Processor - com.app.XMLProcessor-->
+
+    </bean>
+
+</beans>
+
