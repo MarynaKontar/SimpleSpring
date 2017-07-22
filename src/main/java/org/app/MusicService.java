@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class MusicService implements Serializable {
     @Autowired
     @Qualifier("diskImpl2")
+//    @Resource(name = "diskImpl2")
 //    @Inject - тоже, что и Autowired, но не только для spring, а и для других контейнеров
     //если у нас только одна имплементация CompactDisk, то можно поставить такую аннотацию и эта имплементация
     // будет выбераться автоматически. Если же не одна имплементация, то надо указать или в annotation-config.xml
